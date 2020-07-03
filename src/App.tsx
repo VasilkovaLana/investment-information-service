@@ -1,10 +1,18 @@
 import React from 'react';
-import { Form } from './components/form';
+import Routes from './routes';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { TopBar } from './components/topBar';
+import { CurrentQuotesProvider } from './contexts/currentQuotes';
 
 function App() {
   return (
     <div className="App">
-      <Form />
+      <CurrentQuotesProvider>
+        <Router>
+          <TopBar />
+          <Routes />
+        </Router>
+      </CurrentQuotesProvider>
     </div>
   );
 }

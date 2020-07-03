@@ -1,33 +1,30 @@
 import React, { FC, useState, ChangeEvent, FormEvent } from 'react';
-import { useWebSocket } from '../hooks/useWebSocket';
+import { useHistory } from 'react-router';
 
 export const Form: FC = () => {
-  const securityToken = 'br8guuvrh5ral083gk80';
   const [newMessage, setNewMessage] = useState('');
-  const { messages, isConnected, transferredData } = useWebSocket(
-    securityToken
-  );
+  const history = useHistory();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewMessage(event.target.value);
   };
 
   const onMessageSubmit = (event: FormEvent<HTMLFormElement>) => {
+    history.push(`${newMessage}`);
     event.preventDefault();
-    transferredData(newMessage);
   };
 
-  if (isConnected) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <form onSubmit={onMessageSubmit}>
-      <input type="text" value={newMessage} onChange={handleChange} />
-      <button type="submit">Send</button>
-      <p>Ticker: {messages && messages.data[0].s}</p>
-      <p>Last price: {messages && messages.data[0].p} </p>
-      <p>Volume: {messages && messages.data[0].v}</p>
-    </form>
+    <div>
+      <form onSubmit={onMessageSubmit}>
+        <input
+          placeholder="тикер"
+          type="text"
+          value={newMessage}
+          onChange={handleChange}
+        />
+        <button type="submit">Send</button>
+      </form>
+    </div>
   );
 };
