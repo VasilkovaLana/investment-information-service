@@ -10,7 +10,7 @@ export const Form: FC = () => {
   };
 
   const onMessageSubmit = (event: FormEvent<HTMLFormElement>) => {
-    history.push(`${newMessage}`);
+    history.push(`/companies/${newMessage}`);
     event.preventDefault();
   };
 

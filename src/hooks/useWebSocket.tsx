@@ -51,6 +51,19 @@ export const useWebSocket = (securityToken: string) => {
     };
   }, [securityToken, serverUrl, socket, subscribe, unsubscribe]);
 
+  useEffect(() => {
+    return () => {
+      const cleanupConnection = () => {
+        if (socket) {
+          socket.send(JSON.stringify(unsubscribe));
+          socket.close();
+        }
+      };
+      cleanupConnection();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket]);
+
   return { messages, isConnected, transferredData };
 };
 

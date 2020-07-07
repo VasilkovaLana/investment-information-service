@@ -6,7 +6,8 @@ export default () => {
   return (
     <Switch>
       <Route path="/" exact />
-      <Route exact path="/:symbolId" component={RealTimeQuotes} />
+      <Route exact path="/companies/:symbolId" component={RealTimeQuotes} />
+      <Route exact path="/news" />
     </Switch>
   );
 };
