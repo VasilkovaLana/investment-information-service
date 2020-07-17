@@ -68,13 +68,11 @@ export const useWebSocket = (securityToken: string) => {
 };
 
 interface IMessages {
-  data: [
-    {
-      p: number;
-      s: string;
-      v: number;
-    }
-  ];
+  data: {
+    p: number;
+    s: string;
+    v: number;
+  }[];
 }
 
 interface ITransferredData {
