@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useWebSocket } from '../hooks/useWebSocket';
+import { useFetch } from '../hooks/useFetch';
 import { Loading } from './loading';
 
 import styled, { keyframes } from 'styled-components';
@@ -44,16 +45,13 @@ const StockPrice = styled.div<{ growthIndicator: Movement | '' }>`
   }
 `;
 
-export const RealTimeQuotes: FC<IRealTimeQuotes> = ({ match }) => {
+export const RealTimeQuotes: FC<IRealTimeQuotes> = ({ symbol }: any) => {
   const securityToken = 'br8guuvrh5ral083gk80';
   const [prevPrice, setPrevPrice] = useState<number | null>(null);
   const [changePrice, setChangePrice] = useState<number>(0);
   const { messages, isConnected, transferredData } = useWebSocket(
     securityToken
   );
-  const {
-    params: { symbolId: symbol },
-  } = match;
 
   useEffect(() => {
     if (symbol) {
@@ -104,9 +102,5 @@ export const RealTimeQuotes: FC<IRealTimeQuotes> = ({ match }) => {
 };
 
 interface IRealTimeQuotes {
-  match: {
-    params: {
-      symbolId: string;
-    };
-  };
+  symbol: string;
 }

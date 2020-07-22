@@ -1,12 +1,12 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { RealTimeQuotes } from './components/realTimeQuotes';
+import { ViewCompany } from './components/viewCompany';
 
 export default () => {
   return (
     <Switch>
       <Route path="/" exact />
-      <Route exact path="/companies/:symbolId" component={RealTimeQuotes} />
+      <Route exact path="/companies/:symbolId" component={ViewCompany} />
       <Route exact path="/news" />
     </Switch>
   );
