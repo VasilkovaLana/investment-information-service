@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useWebSocket } from '../hooks/useWebSocket';
-import { useFetch } from '../hooks/useFetch';
 import { Loading } from './loading';
 
 import styled, { keyframes } from 'styled-components';
@@ -11,12 +10,12 @@ enum Movement {
 }
 const redBg = keyframes`
   to {
-    background: #ab4950;
+    background: #ab4950a8;
   }
 `;
 const greenBg = keyframes`
   to {
-    background: #54a085;
+    background: #54a08591;
   }
 `;
 
@@ -28,24 +27,35 @@ const animChange = (arg: Movement | '') => {
   }
 };
 
-const StockPrice = styled.div<{ growthIndicator: Movement | '' }>`
+const OverViewBox = styled.div`
   width: 170px;
   display: flex;
-  background: #364f6b;
+  flex-direction: column;
   text-align: center;
-  font-size: 18px;
+  font-size: 12px;
   font-weight: 600px;
   margin: 15px 0;
   padding: 0 16px;
   color: #c6d3dc;
-  span {
-    margin: auto;
-    padding: 6px 2px;
-    animation: 0.6s ${(props) => animChange(props.growthIndicator)} ease-out;
-  }
+`;
+
+const Quote = styled.span<{ growthIndicator: Movement | '' }>`
+  font-size: 40px;
+  margin: auto;
+  padding: 6px 2px;
+  animation: 0.6s ${(props) => animChange(props.growthIndicator)} ease-out;
 `;
 
 export const RealTimeQuotes: FC<IRealTimeQuotes> = ({ symbol }: any) => {
+  return (
+    <OverViewBox>
+      <p>LAST PRICE</p>
+      <StockPrice symbol={symbol} />
+    </OverViewBox>
+  );
+};
+
+const StockPrice: FC<IRealTimeQuotes> = ({ symbol }) => {
   const securityToken = 'br8guuvrh5ral083gk80';
   const [prevPrice, setPrevPrice] = useState<number | null>(null);
   const [changePrice, setChangePrice] = useState<number>(0);
@@ -90,15 +100,10 @@ export const RealTimeQuotes: FC<IRealTimeQuotes> = ({ symbol }: any) => {
       return state;
     };
 
-    return (
-      <StockPrice growthIndicator={checkNumber()}>
-        <p>Last price:</p>
-        <span>{price}</span>
-      </StockPrice>
-    );
+    return <Quote growthIndicator={checkNumber()}>{price}</Quote>;
   }
 
-  return <></>;
+  return <div></div>;
 };
 
 interface IRealTimeQuotes {

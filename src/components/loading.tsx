@@ -5,9 +5,9 @@ import styled from 'styled-components';
 const Content = styled.div`
   color: #fff;
   margin-top: 10px;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 export const Loading = () => {
-  return <Content>Loading...</Content>;
+  return <Content>loading...</Content>;
 };

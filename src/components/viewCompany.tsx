@@ -2,6 +2,12 @@ import React, { FC } from 'react';
 import { RealTimeQuotes } from './realTimeQuotes';
 import { CompanyProfile } from './companyProfile';
 
+import styled from 'styled-components';
+
+const InstrumentHead = styled.section`
+  width: 100%;
+`;
+
 export const ViewCompany: FC<IViewCompany> = ({ match }) => {
   const {
     params: { symbolId: symbol },
@@ -10,10 +16,9 @@ export const ViewCompany: FC<IViewCompany> = ({ match }) => {
   console.log('symbol', symbol);
 
   return (
-    <>
-      <RealTimeQuotes symbol={symbol} />
+    <InstrumentHead>
       <CompanyProfile symbol={symbol} />
-    </>
+    </InstrumentHead>
   );
 };
 

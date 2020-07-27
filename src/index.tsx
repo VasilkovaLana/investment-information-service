@@ -14,6 +14,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: sans-serif;
     font-size: 16px;
     background: #183048;
+    .box {
+      padding: 48px 32px;
+      background: #364f6b;
+    }
   }
 `;
 
