@@ -9,13 +9,21 @@ enum Movement {
   DECREASE = 'decrease',
 }
 const redBg = keyframes`
-  to {
+  from {
     background: #ab4950a8;
+  }
+  to {
+    color: #f45b5b;
+    background: none;
   }
 `;
 const greenBg = keyframes`
-  to {
+  from {
     background: #54a08591;
+  }
+  to {
+    background: none;
+    color: #1db954;
   }
 `;
 
@@ -43,7 +51,7 @@ const Quote = styled.span<{ growthIndicator: Movement | '' }>`
   font-size: 40px;
   margin: auto;
   padding: 6px 2px;
-  animation: 0.6s ${(props) => animChange(props.growthIndicator)} ease-out;
+  animation: 0.8s ${(props) => animChange(props.growthIndicator)} ease-out both;
 `;
 
 export const RealTimeQuotes: FC<IRealTimeQuotes> = ({ symbol }: any) => {
