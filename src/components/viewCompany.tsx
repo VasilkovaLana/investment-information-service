@@ -13,8 +13,6 @@ export const ViewCompany: FC<IViewCompany> = ({ match }) => {
     params: { symbolId: symbol },
   } = match;
 
-  console.log('symbol', symbol);
-
   return (
     <InstrumentHead>
       <CompanyProfile symbol={symbol} />

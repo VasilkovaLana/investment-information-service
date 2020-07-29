@@ -69,8 +69,6 @@ export const CompanyProfile: FC<ICompanyProfile> = ({ symbol }) => {
     `${companyProfileUrl}${symbol}&token=${securityToken}`
   );
 
-  console.log('response', response);
-
   return (
     <WrapperCompanyProfile>
       {response && (
