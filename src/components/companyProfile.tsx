@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useFetch } from '../hooks/useFetch';
 import { RealTimeQuotes } from './realTimeQuotes';
 
 import styled from 'styled-components';
+import { Loading } from './loading';
 
 const WrapperCompanyProfile = styled.div`
   /* display: flex; */
@@ -65,12 +66,17 @@ export const CompanyProfile: FC<ICompanyProfile> = ({ symbol }) => {
   const companyProfileUrl = '/stock/profile2?symbol=';
   const securityToken = 'br8guuvrh5ral083gk80';
 
-  const { response } = useFetch(
+  const { response, fetchData, isLoading } = useFetch(
     `${companyProfileUrl}${symbol}&token=${securityToken}`
   );
 
+  useEffect(() => {
+    fetchData();
+  }, [symbol]);
+
   return (
     <WrapperCompanyProfile>
+      {isLoading && <Loading />}
       {response && (
         <>
           <WidgetHeader className="box">

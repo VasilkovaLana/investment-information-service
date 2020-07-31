@@ -10,7 +10,7 @@ const NavBar = styled.nav`
   justify-content: center;
   width: 100%;
   padding: 8px 0;
-  margin-bottom: 16px;
+  margin-bottom: 40px;
 `;
 
 const NavBarWrapper = styled.div`

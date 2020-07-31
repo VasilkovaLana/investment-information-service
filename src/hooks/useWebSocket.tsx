@@ -14,6 +14,7 @@ export const useWebSocket = (securityToken: string) => {
 
   const transferredData = (topic: string) => {
     if (subscribe.symbol === topic) return;
+    setIsConnected(true);
     if (subscribe.symbol) {
       setUnsubscribe({
         ...unsubscribe,
@@ -41,7 +42,6 @@ export const useWebSocket = (securityToken: string) => {
     }
 
     socket.send(JSON.stringify(subscribe));
-    setIsConnected(true);
 
     socket.onmessage = (eventMessages: IEventMessages) => {
       const socketMessage = JSON.parse(eventMessages.data);

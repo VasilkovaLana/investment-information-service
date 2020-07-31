@@ -65,31 +65,28 @@ export const StockPrice: FC<IStockPrice> = ({ symbol }) => {
     messages && setPrevPrice(+messages.data[0].p);
   }, [changePrice, messages, prevPrice]);
 
-  if (isConnected) {
-    return <Loading />;
-  }
+  const checkNumber = () => {
+    let state: Movement | '' = '';
+    if (changePrice > 0) {
+      state = Movement.INCREASE;
+    }
+    if (changePrice < 0) {
+      state = Movement.DECREASE;
+    }
 
-  if (messages) {
-    const {
-      data: [{ p: price }],
-    } = messages;
+    return state;
+  };
 
-    const checkNumber = () => {
-      let state: Movement | '' = '';
-      if (changePrice > 0) {
-        state = Movement.INCREASE;
-      }
-      if (changePrice < 0) {
-        state = Movement.DECREASE;
-      }
-
-      return state;
-    };
-
-    return <Quote growthIndicator={checkNumber()}>{price}</Quote>;
-  }
-
-  return <div></div>;
+  return (
+    <>
+      {isConnected && <Loading />}
+      {messages && (
+        <Quote growthIndicator={checkNumber()}>
+          {messages.data[0].p.toFixed(2)}
+        </Quote>
+      )}
+    </>
+  );
 };
 
 interface IStockPrice {

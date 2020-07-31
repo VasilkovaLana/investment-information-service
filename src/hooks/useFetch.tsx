@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 export const useFetch = (url: string) => {
   const baseUrl = 'https://finnhub.io/api/v1';
   const [isLoading, setIsLoading] = useState(false);
+  const [response, setResponse] = useState<any>(null);
   const [response, setResponse] = useState<null | IResponse>(null);
   const [error, setError] = useState(null);
 
@@ -25,11 +26,11 @@ export const useFetch = (url: string) => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
-  return { isLoading, response, error };
+  return { isLoading, response, error, fetchData };
 };
 
 interface IResponse {
